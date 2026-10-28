@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#050505">
+<meta name="description" content="MONO is a black and white Minecraft Java launcher for Windows with animated themes and built-in Modrinth mod downloads.">
+<link rel="icon" type="image/png" href="icon.png">
+<title>MONO Launcher</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&family=Unbounded:wght@700;800&display=swap">
+<style>
+/* Layout: one tall black page, huge wordmark and download first, then install steps and a plain feature list. Single committed look: black and white. */
+:root{
+  --bg:#050505; --fg:#f4f4f2; --dim:#8d8d89; --line:#232323; --panel:#0e0e0e;
+  --display:'Unbounded','Arial Black',sans-serif; --body:'IBM Plex Sans','Segoe UI',sans-serif; --mono:'IBM Plex Mono',Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body);padding-block:clamp(28px,6vw,72px);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));margin:0}
+.wrap{max-width:900px;margin:0 auto;display:grid;gap:clamp(48px,8vw,88px)}
+.top{display:flex;align-items:center;gap:12px;font:500 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.top svg{width:34px;height:34px;flex:none}
+h1{font:800 clamp(64px,19vw,176px)/.9 var(--display);letter-spacing:-.04em;margin:0}
+h1 i{font-style:normal;animation:blink 1.6s steps(1) infinite}
+@keyframes blink{50%{opacity:.15}}
+.lead{max-width:34em;font-size:clamp(17px,2.4vw,21px);color:var(--fg);margin:22px 0 0}
+.cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:34px}
+.dl{display:inline-flex;align-items:center;gap:12px;background:var(--fg);color:var(--bg);text-decoration:none;font:700 15px var(--display);letter-spacing:.02em;padding:18px 28px;border:1px solid var(--fg);transition:background .2s,color .2s,transform .2s}
+.dl[aria-disabled="true"]{opacity:.45;cursor:not-allowed;pointer-events:none}
+.dl:hover{background:var(--bg);color:var(--fg);transform:translateY(-2px)}
+.dl:focus-visible,a:focus-visible{outline:2px solid var(--fg);outline-offset:4px}
+.meta{font:400 13px/1.7 var(--mono);color:var(--dim)}
+h2{font:700 13px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin:0 0 22px;display:flex;gap:14px;align-items:center}
+h2::after{content:"";height:1px;background:var(--line);flex:1}
+ol{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid var(--line)}
+li.step{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;padding:22px 0;border-bottom:1px solid var(--line)}
+li.step b{font:500 18px var(--body)}
+li.step span{color:var(--dim);min-width:0}
+code{font:400 14px var(--mono);background:var(--panel);border:1px solid var(--line);padding:1px 7px;color:var(--fg);overflow-wrap:anywhere}
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.feat div{padding:20px 22px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-width:0}
+.feat b{display:block;font:500 16px var(--body);margin-bottom:4px}
+.feat span{color:var(--dim);font-size:14.5px}
+.note{border:1px solid var(--line);background:var(--panel);padding:20px 22px;color:var(--dim);font-size:14.5px}
+.note b{color:var(--fg);font-weight:500}
+footer{font:400 12px/1.8 var(--mono);color:var(--dim)}
+@media (prefers-reduced-motion:reduce){h1 i{animation:none}.dl{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="top">
+      <svg viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="112" fill="#000"/><rect x="14" y="14" width="484" height="484" rx="100" fill="none" stroke="#fff" stroke-opacity=".25" stroke-width="4"/><path d="M104 372V148L226 276L348 148V372" fill="none" stroke="#fff" stroke-width="48"/><rect x="384" y="324" width="48" height="48" fill="#fff"/></svg>
+      Minecraft Java launcher for Windows
+    </div>
+    <h1 style="margin-top:36px">MONO<i>.</i></h1>
+    <p class="lead">A black and white Minecraft launcher with animated backgrounds. Search and install mods, resource packs and shaders from Modrinth without leaving it.</p>
+    <div class="cta">
+      <a class="dl" id="dl" href="#get" aria-disabled="true">Download for Windows</a>
+      <div class="meta"><span id="dlnote">Download link coming soon</span><br>Windows 10 or 11 · no telemetry</div>
+    </div>
+  </header>
+
+  <section>
+    <h2>Install in four steps</h2>
+    <ol>
+      <li class="step"><b>1. Unzip it</b><span>Right-click the zip, choose Extract All, and put the folder somewhere permanent such as Documents.</span></li>
+      <li class="step"><b>2. Run <code>Start-MONO.bat</code></b><span>The first run downloads what it needs and takes a minute or two. After that it opens straight away.</span></li>
+      <li class="step"><b>3. Sign in with Microsoft</b><span>Use the account that owns Minecraft Java Edition. The login is encrypted by Windows and stays on your computer.</span></li>
+      <li class="step"><b>4. Add it to your Start menu</b><span>Close MONO, then run <code>Add-MONO-to-Apps.bat</code> once. Press the Windows key and type MONO to open it, or pin it to the taskbar.</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>What is inside</h2>
+    <div class="feat">
+      <div><b>Mods, packs and shaders</b><span>Browse Modrinth, install in one click, and see which ones you already have.</span></div>
+      <div><b>Fabric, Forge, OptiFine</b><span>Pick a loader on the Play page. Java is downloaded for you if it is missing.</span></div>
+      <div><b>FPS boost mods</b><span>Installs Sodium, Lithium, FerriteCore and friends for your version in one button.</span></div>
+      <div><b>Installed page</b><span>Search, page through, import your own files, and check for updates.</span></div>
+      <div><b>Server status</b><span>Live player counts and ping. Join a server straight from the list.</span></div>
+      <div><b>World backups</b><span>Automatic backup before each launch, with restore.</span></div>
+      <div><b>Crash doctor</b><span>Reads a crash report and tells you the likely cause.</span></div>
+      <div><b>11 themes</b><span>Mono by default, plus animated cherry blossom, embers, snow, stars and more.</span></div>
+      <div><b>Quick commands</b><span>Press Ctrl+K anywhere. Export your whole setup as a <code>.monopack</code> file.</span></div>
+    </div>
+  </section>
+
+  <section class="note">
+    <b>If Windows shows "Windows protected your PC":</b> click More info, then Run anyway. MONO is a personal project and is not code-signed. You need to own Minecraft Java Edition to play. MONO is not made by or affiliated with Mojang or Microsoft.
+  </section>
+
+  <footer>Made by Hdte · for personal use</footer>
+</div>
+<script>
+/* Paste the public download link (a GitHub release file) between the quotes. */
+var DOWNLOAD_URL = "https://github.com/MONONumber1/mono/releases/download/v1/mono-launcher.1.zip";
+var a = document.getElementById("dl"), n = document.getElementById("dlnote");
+if (DOWNLOAD_URL) { a.href = DOWNLOAD_URL; a.removeAttribute("aria-disabled"); n.textContent = "mono-launcher.zip · 85 KB"; }
+</script>
+</body>
+</html>
